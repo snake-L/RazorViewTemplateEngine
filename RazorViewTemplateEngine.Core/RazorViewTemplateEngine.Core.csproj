@@ -1,8 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageVersion>1.0.0</PackageVersion>
     <TargetFrameworks>net6.0;net7.0;netstandard2.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Title>RazorViewTemplateEngine.Core</Title>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>razor视图模板引擎</Description>
+    <Authors>Juicy beef ball</Authors>
+    <RepositoryUrl>https://github.com/867824092/RazorViewTemplateEngine.git</RepositoryUrl>
+    <PackageOutputPath>..</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
