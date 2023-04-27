@@ -9,7 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D3B03A7E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorViewTemplateEngine.Core", "RazorViewTemplateEngine.Core\RazorViewTemplateEngine.Core.csproj", "{B4926D70-7B3F-484A-BD11-0FA394A7DE13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorViewTemplateEngine.Tests", "tests\RazorViewTemplateEngine.Tests\RazorViewTemplateEngine.Tests.csproj", "{81533F07-4878-4519-AB58-4E8AA31E9253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorViewTemplateEngine.Tests", "tests\RazorViewTemplateEngine.Tests\RazorViewTemplateEngine.Tests.csproj", "{81533F07-4878-4519-AB58-4E8AA31E9253}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{C51C3F4A-3ED5-40C9-A6E8-682AF6DC9697}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
