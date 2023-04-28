@@ -26,4 +26,10 @@
     <ProjectReference Include="..\..\RazorViewTemplateEngine.Core\RazorViewTemplateEngine.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Views\Hello.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

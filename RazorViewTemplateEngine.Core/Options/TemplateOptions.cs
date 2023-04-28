@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace RazorViewTemplateEngine.Core.Options {
     public sealed class TemplateOptions {
         /// <summary>
-        /// 文件夹路径
-        /// <remarks>
-        /// 默认值为当前目录
-        /// </remarks>
+        /// 物理文件夹路径
         /// </summary>
-        public string TemplateDirectoryPath { get; set; } = "/";
-
+        public string PhysicalDirectoryPath { get; set; }
+        /// <summary>
+        /// 文件通配符 * 代表所有文件
+        /// </summary>
+        public string FileWildcard { get; set; } = "*";
         /// <summary>
         /// 模板字符串集合
         /// </summary>

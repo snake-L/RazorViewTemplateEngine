@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Razor.Language;
 using RazorViewTemplateEngine.Core.Interface;
 
-namespace RazorViewTemplateEngine.Core.Internal {
+namespace RazorViewTemplateEngine.Core {
 
     // Internal for testing
     [DebuggerDisplay("{Path}")]

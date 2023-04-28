@@ -20,12 +20,12 @@ namespace RazorViewTemplateEngine.Core.Internal
     /// </summary>
     internal class RuntimeViewCompiler : IRuntimeViewCompiler
     {
-        readonly CSharpCompiler _csharpCompiler;
-        readonly RazorProjectEngine _projectEngine;
-        readonly MvcRazorRuntimeCompilationOptions _runtimeCompilationOptions;
-        readonly ReaderWriterLockSlim _readerLockSlim;
-        readonly Dictionary<string, CompiledViewDescriptor> _compiledViewDescriptors;
-        private readonly RazorFileSystem _razorFileSystem;
+       private  readonly CSharpCompiler _csharpCompiler;
+       private  readonly RazorProjectEngine _projectEngine;
+       private  readonly MvcRazorRuntimeCompilationOptions _runtimeCompilationOptions;
+       private  readonly ReaderWriterLockSlim _readerLockSlim;
+       private  readonly Dictionary<string, CompiledViewDescriptor> _compiledViewDescriptors; 
+       private  readonly RazorFileSystem _razorFileSystem;
         public RuntimeViewCompiler(
             RazorProjectEngine razorProjectEngine,
             CSharpCompiler cSharpCompiler,
@@ -89,15 +89,43 @@ namespace RazorViewTemplateEngine.Core.Internal
             }
         }
 
+        public void OnReCompile(string relativePath) {
+            _readerLockSlim.EnterReadLock();
+            try {
+                if (_compiledViewDescriptors.TryGetValue(relativePath, out var compiledViewDescriptor)) {
+                    compiledViewDescriptor.Dispose();
+                    _compiledViewDescriptors.Remove(relativePath);
+                }
+            }
+            finally {
+                _readerLockSlim?.ExitReadLock();
+            }
+
+            _readerLockSlim.EnterUpgradeableReadLock();
+            try {
+                var descriptor = Compile(relativePath);
+                _readerLockSlim.EnterWriteLock();
+                try {
+                    _compiledViewDescriptors.Add(relativePath, descriptor);
+                }
+                finally {
+                    _readerLockSlim.ExitWriteLock();
+                }
+            }
+            finally {
+                _readerLockSlim.ExitUpgradeableReadLock();
+            }
+        }
+
         internal CompiledViewDescriptor Compile(string relativePath)
         {
-            var fileDescriptor = _razorFileSystem.GetItem(relativePath);
+             var fileDescriptor = _razorFileSystem.GetItem(relativePath);
              if (fileDescriptor == null)
                  throw new NotSupportedException($"RelativePath not supported:{relativePath}");
              
              string fileName = Path.GetRandomFileName();
              RazorSourceDocument razorSourceDocument = fileDescriptor.IsPhysical ?
-                 RazorSourceDocument.ReadFrom(fileDescriptor.Read(),fileName ) : 
+                 RazorSourceDocument.ReadFrom(fileDescriptor.Read(),fileName) : 
                  RazorSourceDocument.Create(fileDescriptor.Content,fileName);
              
              RazorCodeDocument  codeDocument = _projectEngine.Process(

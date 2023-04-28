@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace RazorViewTemplateEngine.Core.Internal {
+namespace RazorViewTemplateEngine.Core {
     public static class ObjectExtenders
     {
         public static bool IsAnonymous(this object obj)

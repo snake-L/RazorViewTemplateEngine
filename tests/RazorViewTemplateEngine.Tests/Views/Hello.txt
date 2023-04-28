@@ -1,0 +1,2 @@
+@inherits RazorViewTemplateEngine.Core.RazorViewPage
+Hello @Model.Name, Welcome to RazorViewTemplateEngine!

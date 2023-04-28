@@ -1,17 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.Extensions.Primitives;
 
 namespace RazorViewTemplateEngine.Core.Interface {
-    internal interface IFileDescriptor {
+    public interface IFileDescriptor : IDisposable {
         /// <summary>
         /// 是否是物理文件
         /// </summary>
         bool IsPhysical { get; }
-        //TODO: 物理文件监听变化,暂时先不实现
-        /// <summary>
-        /// 文件变化监听
-        /// </summary>
-        IChangeToken ChangeToken { get; }
         /// <summary>
         /// 文件相对路径
         /// </summary>

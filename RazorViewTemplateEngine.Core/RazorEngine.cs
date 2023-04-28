@@ -33,15 +33,21 @@ namespace RazorViewTemplateEngine.Core {
         }
         
         
+        public static IRazorEngine Create(){
+            return Create(null,null,null);
+        }
         
-
+        public static IRazorEngine Create(Action<RazorFileSystem,IRuntimeViewCompiler> razorFileSystemAction){
+            return Create(razorFileSystemAction,null,null);
+        }
+        
         /// <summary>
         /// 创建 Razor 引擎
         /// </summary>
         /// <param name="templateOptionsAction">模板配置</param>
         /// <param name="mvcRazorRuntimeCompilationOptionsAction">运行时编译配置</param>
-        public static IRazorEngine Create(Action<TemplateOptions> templateOptionsAction = null,
-            Action<MvcRazorRuntimeCompilationOptions> mvcRazorRuntimeCompilationOptionsAction = null){
+        public static IRazorEngine Create(Action<RazorFileSystem,IRuntimeViewCompiler> razorFileSystemAction,Action<TemplateOptions> templateOptionsAction,
+            Action<MvcRazorRuntimeCompilationOptions> mvcRazorRuntimeCompilationOptionsAction){
             var templateOptions = new TemplateOptions();
             templateOptionsAction?.Invoke(templateOptions);
             var mvcRazorRuntimeCompilationOptions = new MvcRazorRuntimeCompilationOptions();
@@ -52,10 +58,13 @@ namespace RazorViewTemplateEngine.Core {
                 builder.SetNamespace(mvcRazorRuntimeCompilationOptions.TemplateNamespace);
             });
             var cSharpCompiler = new CSharpCompiler(new RazorReferenceManager(mvcRazorRuntimeCompilationOptions));
-            return new RazorEngine(new RuntimeViewCompiler(engine,
+            var razorFileSystem = new RazorFileSystem(templateOptions,mvcRazorRuntimeCompilationOptions);
+            var runtimeViewCompiler = new RuntimeViewCompiler(engine,
                 cSharpCompiler,
-                new RazorFileSystem(templateOptions,mvcRazorRuntimeCompilationOptions),
-                mvcRazorRuntimeCompilationOptions));
+                razorFileSystem,
+                mvcRazorRuntimeCompilationOptions);
+            razorFileSystemAction?.Invoke(razorFileSystem,runtimeViewCompiler);
+            return new RazorEngine(runtimeViewCompiler);
         }
     }
 }
