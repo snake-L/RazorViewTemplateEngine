@@ -8,7 +8,7 @@ using RazorViewTemplateEngine.Core.Internal;
 namespace RazorViewTemplateEngine.Core.FileDescriptor {
     public class PhysicalFileDescriptor : AbstractFileDescriptor {
         
-        public Action<object> OnPhysicalFileChanged { get; set; }
+        private Action<object> OnPhysicalFileChanged { get; set; }
         
         private PhysicalFileReloadToken _reloadToken = new PhysicalFileReloadToken();
         private IDisposable ChangeTokenRegistration { get; set; }
@@ -60,6 +60,7 @@ namespace RazorViewTemplateEngine.Core.FileDescriptor {
         }
         public override void Dispose() {
             ChangeTokenRegistration?.Dispose();
+            OnPhysicalFileChanged = null;
         }
     }
 }

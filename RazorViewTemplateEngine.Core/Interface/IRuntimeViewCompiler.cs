@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.FileProviders;
 using RazorViewTemplateEngine.Core.FileDescriptor;
 
 namespace RazorViewTemplateEngine.Core.Interface {
@@ -16,5 +17,9 @@ namespace RazorViewTemplateEngine.Core.Interface {
         /// 重新编译
         /// </summary>
         void OnReCompile(string relativePath);
+        /// <summary>
+        /// 文件提供者
+        /// </summary>
+        IFileProvider FileProvider { get; }
     }
 }

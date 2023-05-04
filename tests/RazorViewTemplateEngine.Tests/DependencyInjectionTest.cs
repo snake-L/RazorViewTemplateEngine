@@ -29,10 +29,10 @@ public class DependencyInjectionTest {
         _serviceProvider = services.BuildServiceProvider();
         var fileSystem = _serviceProvider.GetRequiredService<RazorFileSystem>();
         var compiler = _serviceProvider.GetRequiredService<IRuntimeViewCompiler>();
-        var txtPhysicalFileDescriptor = new PhysicalFileDescriptor(fileSystem.FileProvider,
-            "/Hello.txt",
-            compiler.OnReCompile);
-        fileSystem.Add(txtPhysicalFileDescriptor);
+        // var txtPhysicalFileDescriptor = new PhysicalFileDescriptor(compiler.FileProvider,
+        //     "/Hello.txt",
+        //     compiler.OnReCompile);
+        // fileSystem.Add(txtPhysicalFileDescriptor);
         _razorEngine = _serviceProvider.GetRequiredService<IRazorEngine>();
     }
    

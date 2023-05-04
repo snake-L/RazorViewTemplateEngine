@@ -58,11 +58,12 @@ namespace RazorViewTemplateEngine.Core {
                 builder.SetNamespace(mvcRazorRuntimeCompilationOptions.TemplateNamespace);
             });
             var cSharpCompiler = new CSharpCompiler(new RazorReferenceManager(mvcRazorRuntimeCompilationOptions));
-            var razorFileSystem = new RazorFileSystem(templateOptions,mvcRazorRuntimeCompilationOptions);
+            var razorFileSystem = new RazorFileSystem();
             var runtimeViewCompiler = new RuntimeViewCompiler(engine,
                 cSharpCompiler,
                 razorFileSystem,
-                mvcRazorRuntimeCompilationOptions);
+                mvcRazorRuntimeCompilationOptions,
+                templateOptions);
             razorFileSystemAction?.Invoke(razorFileSystem,runtimeViewCompiler);
             return new RazorEngine(runtimeViewCompiler);
         }

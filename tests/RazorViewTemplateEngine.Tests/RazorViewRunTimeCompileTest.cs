@@ -13,10 +13,10 @@ public class RazorViewRunTimeCompileTest {
     private readonly string _rootDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Views");
     public RazorViewRunTimeCompileTest() {
         _razorEngine = RazorEngine.Create((system,compiler) => {
-            var txtPhysicalFileDescriptor = new PhysicalFileDescriptor(system.FileProvider,
-                "/Hello.txt",
-                compiler.OnReCompile);
-            system.Add(txtPhysicalFileDescriptor);
+            // var txtPhysicalFileDescriptor = new PhysicalFileDescriptor(compiler.FileProvider,
+            //     "/Hello.txt",
+            //     compiler.OnReCompile);
+            // system.Add(txtPhysicalFileDescriptor);
         },options => {
             options.PhysicalDirectoryPath = _rootDirectory;
             options.TemplateStringCollections.Add(new TemplateContentCollection()
