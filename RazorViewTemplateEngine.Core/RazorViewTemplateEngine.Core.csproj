@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <TargetFrameworks>net6.0;net7.0;netstandard2.0;net8.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Title>RazorViewTemplateEngine.Core</Title>
@@ -10,7 +10,7 @@
     <Authors>Juicy beef ball</Authors>
     <RepositoryUrl>https://github.com/867824092/RazorViewTemplateEngine.git</RepositoryUrl>
     <PackageOutputPath>..</PackageOutputPath>
-    <PackageReleaseNotes>1、更新物理文件模板编译，默认支持热更新（主动添加物理文件，后续支持通配符进行匹配）</PackageReleaseNotes>
+    <PackageReleaseNotes>1、根据通配符查找所设置目录下的文件，并加入到模板中，支持热更新</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
