@@ -7,10 +7,21 @@ namespace RazorViewTemplateEngine.Core.Options {
         /// 物理文件夹路径
         /// </summary>
         public string PhysicalDirectoryPath { get; set; }
+
+        private string _fileWildcard = "*";
+
         /// <summary>
         /// 文件通配符 * 代表所有文件
         /// </summary>
-        public string FileWildcard { get; set; } = "*";
+        public string FileWildcard {
+            get => _fileWildcard;
+            set {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException(nameof(value), "FileWildcard can not be null or empty");
+                _fileWildcard = value;
+            }
+        }
+
         /// <summary>
         /// 模板字符串集合
         /// </summary>
