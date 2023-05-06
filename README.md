@@ -85,5 +85,4 @@ Hello @Model.Name, Welcome to RazorViewTemplateEngine!
 ```
 支持物理模板文件，监听文件变化自动重新编译 ✨
 
-TODO
 * [x] 根据设置的根目录结合通配符筛选模板文件
