@@ -27,7 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Views\Hello.txt">
+    <None Update="Views\Hello.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Hello.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

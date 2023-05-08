@@ -10,11 +10,12 @@ namespace RazorViewTemplateEngine.Tests;
 public class DependencyInjectionTest {
     private IServiceProvider _serviceProvider;
     private IRazorEngine _razorEngine;
-    private readonly string _rootDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Views");
+    private readonly string _rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
     public DependencyInjectionTest() {
         var services = new ServiceCollection();
         services.AddRazorViewTemplateEngine(options => { 
             options.PhysicalDirectoryPath = _rootDirectory;
+            options.FileWildcard = "Hello*";
             options.TemplateStringCollections.Add(new TemplateContentCollection()
             {
             VirtualPath = "/Views/Home/Index.cshtml",
@@ -63,6 +64,7 @@ public class DependencyInjectionTest {
     }
     [Theory]
     [InlineData("/Hello.txt")]
+    [InlineData("/Views/Hello.cshtml")]
     public async Task should_compile_with_physicalfile_success(string path) {
         var result = await _razorEngine.CompileDynamicAsync(path, new
         { Name = "Alx" });

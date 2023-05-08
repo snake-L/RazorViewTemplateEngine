@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageVersion>1.0.4</PackageVersion>
+    <PackageVersion>1.0.5</PackageVersion>
     <TargetFrameworks>net6.0;net7.0;netstandard2.0;net8.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Title>RazorViewTemplateEngine.Core</Title>
@@ -10,7 +10,7 @@
     <Authors>Juicy beef ball</Authors>
     <RepositoryUrl>https://github.com/867824092/RazorViewTemplateEngine.git</RepositoryUrl>
     <PackageOutputPath>..</PackageOutputPath>
-    <PackageReleaseNotes>1、优化依赖</PackageReleaseNotes>
+    <PackageReleaseNotes>1、修复虚拟路径判断bug</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -175,10 +175,8 @@ namespace RazorViewTemplateEngine.Core.Internal
             string[] allFiles = Directory.GetFiles(_templateOptions.PhysicalDirectoryPath,
                 _templateOptions.FileWildcard, SearchOption.AllDirectories);
             foreach (string file in allFiles) {
-                string relativePath = file.AsSpan().Slice(_templateOptions.PhysicalDirectoryPath.Length).ToString()
+                string relativePath = file.AsSpan().Slice(_templateOptions.PhysicalDirectoryPath.Length-1).ToString()
                     .Replace("\\", "/");
-                if (!relativePath.StartsWith("/"))
-                    relativePath = "/" + relativePath;
                 
                 _razorFileSystem.Add(new PhysicalFileDescriptor(_fileProvider,
                     relativePath,
