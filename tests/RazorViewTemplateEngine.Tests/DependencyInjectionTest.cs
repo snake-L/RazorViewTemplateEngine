@@ -24,15 +24,26 @@ public class DependencyInjectionTest {
             { VirtualPath = "/Views/Home/About.cshtml",
               Content = @"Hello @Model.Name, Welcome to RazorViewTemplateEngine!",
               InheritanceType = typeof(Student) });
+            options.TemplateStringCollections.Add(new TemplateContentCollection()
+            {
+            VirtualPath = "/Views/Home/Entity.cshtml",
+            Content = @"using System;
+                        using System.Collections.Generic;
+                        namespace @Model.NameSpace
+                        {
+                            public class @Model.TableName
+                            {
+                                @foreach (var item in Model.Columns)
+                                {
+                                    @:public @item.ColumnType @item.ColumnName { get; set; }
+                                }
+                            }
+                        }",
+              InheritanceType = typeof(TableStructure)
+            });
         },
             options => { options.AddAssemblyReference(typeof(Student).Assembly); });
         _serviceProvider = services.BuildServiceProvider();
-        var fileSystem = _serviceProvider.GetRequiredService<RazorFileSystem>();
-        var compiler = _serviceProvider.GetRequiredService<IRuntimeViewCompiler>();
-        // var txtPhysicalFileDescriptor = new PhysicalFileDescriptor(compiler.FileProvider,
-        //     "/Hello.txt",
-        //     compiler.OnReCompile);
-        // fileSystem.Add(txtPhysicalFileDescriptor);
         _razorEngine = _serviceProvider.GetRequiredService<IRazorEngine>();
     }
    
@@ -69,5 +80,28 @@ public class DependencyInjectionTest {
         result = await _razorEngine.CompileDynamicAsync(path, new
         { Name = "Alx" });
         Assert.Equal("Hello Alx", result.Replace("\r\n",""));
+    }
+
+    [Fact]
+    public async Task should_compile_entity_success() {
+        var model = new
+            TableStructure(2)
+            { NameSpace = "RazorViewTemplateEngine.Tests",
+              TableName = "Student" };
+        model.Columns.Add(new ColumnDescription()
+        {
+         ColumnName = "Id",
+         ColumnType = "int",
+            Comment = "主键",
+         IsCanNull = false
+        }); model.Columns.Add(new ColumnDescription()
+        {
+        ColumnName = "Name",
+        ColumnType = "string",
+        Comment = "姓名",
+        IsCanNull = false
+        });
+        var result = await _razorEngine.CompileGenericAsync("/Views/Home/Entity.cshtml",model);
+        Assert.NotEmpty(result);
     }
 }
