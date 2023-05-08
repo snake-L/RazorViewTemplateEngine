@@ -177,6 +177,9 @@ namespace RazorViewTemplateEngine.Core.Internal
             foreach (string file in allFiles) {
                 string relativePath = file.AsSpan().Slice(_templateOptions.PhysicalDirectoryPath.Length).ToString()
                     .Replace("\\", "/");
+                if (!relativePath.StartsWith("/"))
+                    relativePath = "/" + relativePath;
+                
                 _razorFileSystem.Add(new PhysicalFileDescriptor(_fileProvider,
                     relativePath,
                     OnReCompile));
