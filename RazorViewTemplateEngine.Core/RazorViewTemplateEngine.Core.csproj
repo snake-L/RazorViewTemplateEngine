@@ -10,7 +10,7 @@
     <Authors>Juicy beef ball</Authors>
     <RepositoryUrl>https://github.com/867824092/RazorViewTemplateEngine.git</RepositoryUrl>
     <PackageOutputPath>..</PackageOutputPath>
-    <PackageReleaseNotes>1、修复虚拟路径判断bug</PackageReleaseNotes>
+    <PackageReleaseNotes>1、优化虚拟文件路径</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
