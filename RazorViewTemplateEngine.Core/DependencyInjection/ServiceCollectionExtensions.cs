@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using RazorViewTemplateEngine.Core.Interface;
 using RazorViewTemplateEngine.Core.Internal;
 using RazorViewTemplateEngine.Core.Options;
