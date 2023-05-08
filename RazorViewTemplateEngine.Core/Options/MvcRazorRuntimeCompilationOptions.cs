@@ -16,12 +16,12 @@ namespace RazorViewTemplateEngine.Core.Options
         public MvcRazorRuntimeCompilationOptions() {
             MetadataReferences = new HashSet<MetadataReference>();
             ReferenceAssemblies = new HashSet<Assembly> {
-                typeof(object).Assembly,
+                    typeof(object).Assembly,
                     Assembly.Load(new AssemblyName("Microsoft.CSharp")),
                     typeof(RazorViewPage).Assembly,
-                    Assembly.Load(new AssemblyName("System.Runtime")),
-                    typeof(System.Collections.IList).Assembly,
                     typeof(IEnumerable<>).Assembly,
+                    Assembly.Load(new AssemblyName("System.Runtime")),
+                    Assembly.Load("System.Collections"),
                     Assembly.Load(new AssemblyName("System.Linq")),
                     Assembly.Load(new AssemblyName("System.Linq.Expressions")),
                     Assembly.Load(new AssemblyName("netstandard"))
